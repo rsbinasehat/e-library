@@ -26,7 +26,7 @@
 
 <br/>
 
-## Cara Intsalasi
+## Cara Instalasi
 1. Jalankan composer install untuk install dependencies
    
    ```$ composer install```
