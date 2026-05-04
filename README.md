@@ -26,8 +26,8 @@
 
 <br/>
 
-## Cara Menginstal
-1. Jalankan composer install to install dependencies
+## Cara Instalasi
+1. Jalankan composer install untuk install dependencies
    
    ```$ composer install```
 2. Import database sql
@@ -39,6 +39,15 @@
    ketik perintah ```$ php artisan serve```
 
 
+```NOTE:```
+<br/>
+Untuk merubah admin role database kriterianya:
+<br/>
+m: member atau user
+<br/>
+a: itu untuk admin
+<br/>
+Merubahnya di table user 
 <br/>
 
 
