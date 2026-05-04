@@ -2,7 +2,6 @@
 
 <p align="center">
     E-Library built with Laravel 11 and bootstrap 5.
-    <br/>The design link can be accessed <a href="https://www.figma.com/design/OwJoPM00Iyg0LKcgKhCaYA/KP-SMAM7?node-id=0-1&t=fr9arhrDUSqdgzYt-0">here</a>
 </p>
 
 <h3>Users</h3>
