@@ -46,20 +46,15 @@
 
 <br/>
 
-## How to build
-1. Git clone this repo
-   
-   ```$ git clone https://github.com/ai-null/perpus_digital.git```
-2. Run composer install to install dependencies
+## How to Install
+1. Jalankan composer install to install dependencies
    
    ```$ composer install```
-3. Run migrate
+2. Import database sql
    
-   ```$ php artisan migrate:fresh```
-4. (Optional) run seeder
+   ```import database yang bernama dbperpus.sql ```
    
-   ```$ php artisan db:seed```
-5. Run the program
+3. Run the program
 
    ```$ php artisan serve```
 
@@ -67,11 +62,6 @@
 <br/>
 
 
-## Depedencies
-| Library | Description |
-| ------  | ----------- |
-| [FakerPHP](https://fakerphp.org/) | for database seeding |
-| [FileSystem AWS S3](https://packagist.org/packages/league/flysystem-aws-s3-v3) | for storing image assets |
 
 <br/>
 
