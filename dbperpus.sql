@@ -14,6 +14,27 @@ MySQL - 10.4.20-MariaDB : Database - dbperpus
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`dbperpus` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 
+/*Table structure for table `book` */
+
+DROP TABLE IF EXISTS `book`;
+
+CREATE TABLE `book` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `author` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stock` int(11) NOT NULL DEFAULT 0,
+  `cover` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ebook_pdf_path` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `isbn` varchar(13) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `publisher` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `language` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'Indonesia',
+  `publishing_year` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*Data for the table `book` */
 
 insert  into `book`(`id`,`title`,`author`,`stock`,`cover`,`ebook_pdf_path`,`description`,`isbn`,`publisher`,`language`,`publishing_year`,`created_at`,`updated_at`) values 
@@ -52,6 +73,19 @@ insert  into `book`(`id`,`title`,`author`,`stock`,`cover`,`ebook_pdf_path`,`desc
 (33,'A nulla mollitia et','Violet Suartini',56747565,'1717947023.jpg',NULL,'Ut mollitia vitae autem et et saepe voluptas. Rerum deleniti qui cumque provident. Enim ducimus velit blanditiis fuga sunt ut. Corrupti necessitatibus debitis delectus perspiciatis officia.','0574017717591','Hakim-Pradipta','th',1993,'2026-04-04 01:12:36','2026-04-04 01:12:36'),
 (34,'Non voluptatibus ea voluptate vero beatae','Kenes Ramadan',161436674,'1775271861.png',NULL,'Iste optio cupiditate dolorem suscipit et aut. Et beatae odit quo facere. Velit porro est maiores nisi est. Praesentium facere rerum quia accusamus velit sed.','3988080163006','Rahimah-Hassanah','bg',1999,'2026-04-04 01:12:36','2026-04-04 03:04:21'),
 (35,'Numquam in quo quia','Rosman Mandala',1207790,'1775271843.png',NULL,'Blanditiis occaecati maxime eum culpa iste sed. Amet veniam neque reprehenderit minus rerum doloremque voluptas. Mollitia dolores facilis ut ipsum.','9471912360086','Winarsih, Utami and Rahimah','ka',2011,'2026-04-04 01:12:36','2026-04-04 03:04:04');
+
+/*Table structure for table `book_category` */
+
+DROP TABLE IF EXISTS `book_category`;
+
+CREATE TABLE `book_category` (
+  `book_id` bigint(20) unsigned NOT NULL,
+  `category_id` bigint(20) unsigned NOT NULL,
+  KEY `book_category_book_id` (`book_id`),
+  KEY `book_category_category_id` (`category_id`),
+  CONSTRAINT `book_category_book_id` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `book_category_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `book_category` */
 
@@ -134,9 +168,41 @@ insert  into `book_category`(`book_id`,`category_id`) values
 (35,35),
 (35,33);
 
+/*Table structure for table `cache` */
+
+DROP TABLE IF EXISTS `cache`;
+
+CREATE TABLE `cache` (
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int(11) NOT NULL,
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*Data for the table `cache` */
 
+/*Table structure for table `cache_locks` */
+
+DROP TABLE IF EXISTS `cache_locks`;
+
+CREATE TABLE `cache_locks` (
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int(11) NOT NULL,
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*Data for the table `cache_locks` */
+
+/*Table structure for table `category` */
+
+DROP TABLE IF EXISTS `category`;
+
+CREATE TABLE `category` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `category` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `category` */
 
@@ -182,11 +248,72 @@ insert  into `category`(`id`,`category`) values
 (39,'Olahraga'),
 (40,'Sejarah');
 
+/*Table structure for table `failed_jobs` */
+
+DROP TABLE IF EXISTS `failed_jobs`;
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*Data for the table `failed_jobs` */
+
+/*Table structure for table `job_batches` */
+
+DROP TABLE IF EXISTS `job_batches`;
+
+CREATE TABLE `job_batches` (
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total_jobs` int(11) NOT NULL,
+  `pending_jobs` int(11) NOT NULL,
+  `failed_jobs` int(11) NOT NULL,
+  `failed_job_ids` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `options` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cancelled_at` int(11) DEFAULT NULL,
+  `created_at` int(11) NOT NULL,
+  `finished_at` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `job_batches` */
 
+/*Table structure for table `jobs` */
+
+DROP TABLE IF EXISTS `jobs`;
+
+CREATE TABLE `jobs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `queue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `attempts` tinyint(3) unsigned NOT NULL,
+  `reserved_at` int(10) unsigned DEFAULT NULL,
+  `available_at` int(10) unsigned NOT NULL,
+  `created_at` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `jobs_queue_index` (`queue`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*Data for the table `jobs` */
+
+/*Table structure for table `migrations` */
+
+DROP TABLE IF EXISTS `migrations`;
+
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `migrations` */
 
@@ -202,13 +329,59 @@ insert  into `migrations`(`id`,`migration`,`batch`) values
 (9,'2024_07_13_090125_add_column_to_peminjaman',1),
 (10,'2026_03_30_065200_add_ebook_pdf_path_to_book_table',1);
 
+/*Table structure for table `password_reset_tokens` */
+
+DROP TABLE IF EXISTS `password_reset_tokens`;
+
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 /*Data for the table `password_reset_tokens` */
+
+/*Table structure for table `peminjaman` */
+
+DROP TABLE IF EXISTS `peminjaman`;
+
+CREATE TABLE `peminjaman` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `book_id` bigint(20) unsigned NOT NULL,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `status` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'requested',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `return_at` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `peminjaman_book_id_foreign` (`book_id`),
+  KEY `peminjaman_user_id_foreign` (`user_id`),
+  CONSTRAINT `peminjaman_book_id_foreign` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `peminjaman_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `peminjaman` */
 
 insert  into `peminjaman`(`id`,`book_id`,`user_id`,`status`,`created_at`,`updated_at`,`return_at`) values 
 (1,3,2,'accepted','2026-04-04 03:18:10','2026-04-04 03:18:41','2026-04-11'),
 (2,17,6,'cancelled','2026-04-04 05:21:29','2026-04-04 05:24:58','2026-04-11');
+
+/*Table structure for table `sessions` */
+
+DROP TABLE IF EXISTS `sessions`;
+
+CREATE TABLE `sessions` (
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint(20) unsigned DEFAULT NULL,
+  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_activity` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sessions_user_id_index` (`user_id`),
+  KEY `sessions_last_activity_index` (`last_activity`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `sessions` */
 
@@ -222,6 +395,23 @@ insert  into `sessions`(`id`,`user_id`,`ip_address`,`user_agent`,`payload`,`last
 ('LI5MCHIegwbEdYEeG48SpTLE3Q6uviNdzFTT2p9X',NULL,'192.168.2.109','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36','YTozOntzOjY6Il90b2tlbiI7czo0MDoidGZqekpSSjVnamhtMXJnOGl4MVI1NmhJYm9PRXhkMUR0VkthblFWViI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjU6Imh0dHA6Ly8xOTIuMTY4LjIuMTEwOjgwMDAiO319',1775274122),
 ('OPBFyqOo5tlzNd1jujj4YPMFTzWr4J5fUmVYUndf',NULL,'192.168.2.198','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Safari/605.1.15','YTozOntzOjY6Il90b2tlbiI7czo0MDoiT0pzc1NQUU9JZzJGOEZCYmQ4ZXdsRHlpQWRuRndvNWtsaldYWHNMMSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjU6Imh0dHA6Ly8xOTIuMTY4LjIuMTEwOjgwMDAiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19',1775875149),
 ('YDNCqmqjwSIM1GRnLXDiaTQJdpBjlGoG4hHLIokn',NULL,'192.168.2.193','Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15','YTozOntzOjY6Il90b2tlbiI7czo0MDoiZkU5Sm81eExqNkVUSnZod3h5TGhleUtrdjBFOHVHU2U4eHd6YlA2dCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjU6Imh0dHA6Ly8xOTIuMTY4LjIuMTEwOjgwMDAiO319',1775871912);
+
+/*Table structure for table `user` */
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `nim` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `role` char(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'm',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_nim_unique` (`nim`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `user` */
 
