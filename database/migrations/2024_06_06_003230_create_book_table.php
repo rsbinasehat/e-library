@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('author');
             $table->integer('stock')->default(0);
             $table->string('cover');
+            $table->string('ebook_pdf_path')->nullable();
             $table->text('description')->nullable();
             $table->string('ISBN')->nullable();
             $table->string('publisher')->nullable();

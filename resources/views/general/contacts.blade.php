@@ -15,33 +15,33 @@
         <div class="row justify-content-md-center"
             style="position: relative; width: 75%; left: 50%;transform: translate(-50%);">
             <div class="col">
-                <div class="card position-relative top-50 start-50 translate-middle" style="padding: 16px; cursor: pointer; box-shadow: 0px 4px 10px #00000010">
+                <div class="card position-relative top-50 start-50 translate-middle" style="padding: 16px; box-shadow: 0px 4px 10px #00000010">
                     <div class="card-body" style="display:grid;">
                         <img src="/img/icon/ic_location.webp" height="40px" />
                         <span class="urbanist-semibold"
                             style="font-size: 20px; color: #1746A2; margin-top: 24px;">Lokasi</span>
-                        <span class="amaranth-regular" style="font-size: 16px; color: #7F7F7F; margin-top: 4px;">Jl. Raya Sutorejo
-                            No.98-100</span>
+                        <span class="amaranth-regular" style="font-size: 16px; color: #7F7F7F; margin-top: 4px;">Jl. Jayanegara No.7, Kaliwates Kidul, Kaliwates, Kec. Kaliwates, Kabupaten Jember, Jawa Timur</span>
                     </div>
                 </div>
             </div>
             <div class="col">
-                <div class="card position-relative top-50 start-50 translate-middle" style="padding: 16px; cursor: pointer; box-shadow: 0px 4px 10px #00000010">
+                <div class="card position-relative top-50 start-50 translate-middle" style="padding: 16px; box-shadow: 0px 4px 10px #00000010">
                     <div class="card-body" style="display:grid;">
                         <img src="/img/icon/ic_whatsapp.webp" height="40px" />
                         <span class="urbanist-semibold"
                             style="font-size: 20px; color: #1746A2; margin-top: 24px;">Whatsapp</span>
-                        <span class="amaranth-regular" style="font-size: 16px; color: #7F7F7F; margin-top: 4px;">Chat dengan admin perpustakaan</span>
+                        <span class="amaranth-regular" style="font-size: 16px; color: #7F7F7F; margin-top: 4px;">Chat dengan admin perpustakaan di: 081200000003</span>
                     </div>
                 </div>
             </div>
             <div class="col">
-                <div class="card position-relative top-50 start-50 translate-middle" style="padding: 16px; cursor: pointer; box-shadow: 0px 4px 10px #00000010">
+                <div class="card position-relative top-50 start-50 translate-middle" style="padding: 16px; box-shadow: 0px 4px 10px #00000010">
                     <div class="card-body" style="display:grid;">
                         <img src="/img/icon/ic_gmail.webp" height="40px" />
                         <span class="urbanist-semibold"
                             style="font-size: 20px; color: #1746A2; margin-top: 24px;">Email</span>
-                        <span class="amaranth-regular" style="font-size: 16px; color: #7F7F7F; margin-top: 4px;">hubungi admin melalui email</span>
+                        <span class="amaranth-regular" style="font-size: 16px; color: #7F7F7F; margin-top: 4px;">hubungi melalui email: kampus@itps.ac.id
+</span>
                     </div>
                 </div>
             </div>

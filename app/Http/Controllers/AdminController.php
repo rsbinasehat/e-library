@@ -39,12 +39,20 @@ class AdminController extends BaseController
             'publishing_year' => ['required', 'integer', 'not_in:0'],
             'isbn' => ['required', 'string', 'max:13'],
             'language' => ['nullable', 'string', 'max:30'],
-            'categories' => ['']
+            'stock' => ['required', 'integer', 'min:0'],
+            'categories' => [''],
+            'ebook_pdf' => ['nullable', 'file', 'mimes:pdf', 'max:1024800']
+
         ]);
 
         $imageName = time() . '.' . $request->cover->extension();
         $image = $request->file('cover');
         $image->storeAs('public/covers', $imageName);
+
+        
+    $pdf = $request->file('ebook_pdf');
+    $pdfName = $pdf->hashName(); // Nama file dengan hash (misal: 8FJ9kL2mP9qR.pdf)
+    $pdf->storeAs('public/ebooks', $pdfName); // Simpan dengan nama file spesifik    
 
         $book = Book::create([
             'title' => $request->title,
@@ -54,7 +62,9 @@ class AdminController extends BaseController
             'cover' => $imageName,
             'publishing_year' => $request->publishing_year,
             'isbn' => $request->isbn,
-            'language' => $request->language
+            'stock' => $request->stock,
+            'language' => $request->language,
+            'ebook_pdf_path' => $pdfName ?? null
         ]);
 
         // add categories for book
@@ -111,21 +121,41 @@ class AdminController extends BaseController
     {
         if (!$userProfileProvider->isAdmin()) return redirect()->back();
 
-        // get book by id
+        $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'author' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'publisher' => ['required', 'string', 'max:255'],
+            'publishing_year' => ['required', 'integer', 'not_in:0'],
+            'isbn' => ['required', 'string', 'max:13'],
+            'language' => ['nullable', 'string', 'max:30'],
+            'stock' => ['required', 'integer', 'min:0'],
+            'ebook_pdf' => ['nullable', 'file', 'mimes:pdf', 'max:1024800']
+        ]);
+
         $book = Book::whereId($id)->first();
 
-        // check whether need to update image
+        // Handle cover image update
         $imageName = $book->cover;
-        if (($request->cover != null && $request->cover != '') && $book->cover != $request->cover) {
+        if ($request->hasFile('cover')) {
             $imageName = time() . '.' . $request->cover->extension();
-            $image = $request->file('cover');
-            $image->storeAs('public/covers', $imageName);
-
-            // delete cover after cover updated
+            $request->file('cover')->storeAs('public/covers', $imageName);
+            // Delete old cover
             Storage::delete('public/covers/' . $book->cover);
         }
 
-        // do update
+        // Handle PDF upload
+        $pdfName = $book->ebook_pdf_path;
+        if ($request->hasFile('ebook_pdf')) {
+            $pdfName = $request->file('ebook_pdf')->hashName();
+            $request->file('ebook_pdf')->storeAs('public/ebooks', $pdfName);
+            // Delete old PDF if exists
+            if ($book->ebook_pdf_path) {
+                Storage::delete('public/ebooks/' . $book->ebook_pdf_path);
+            }
+        }
+
+        // Update book
         $book->update([
             'title' => $request->title,
             'author' => $request->author,
@@ -135,7 +165,8 @@ class AdminController extends BaseController
             'publishing_year' => $request->publishing_year,
             'isbn' => $request->isbn,
             'stock' => $request->stock,
-            'language' => $request->language
+            'language' => $request->language,
+            'ebook_pdf_path' => $pdfName
         ]);
         $book->categories()->sync($request->categories);
 

@@ -125,7 +125,7 @@
             <!--begin::Brand Image--> <img src="/img/icon/ic_logo_smam7.png" alt="SMA Muhamamdiyah 7 Logo"
                 class="brand-image opacity-75 shadow">
             <!--end::Brand Image-->
-            <!--begin::Brand Text--> <span class="brand-text fw-light">Perpus Digital SMAM 7</span>
+            <!--begin::Brand Text--> <span class="brand-text fw-light">Perpus Digital ITPS</span>
             <!--end::Brand Text-->
         </a>
         <!--end::Brand Link-->

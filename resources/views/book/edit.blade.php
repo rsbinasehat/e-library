@@ -33,13 +33,13 @@
             <div class="container-fluid"> <!--begin::Row-->
                 <div class="row">
                     <div class="col-sm-6">
-                        <h3 class="mb-0">Tambah Buku</h3>
+                        <h3 class="mb-0">Edit Buku</h3>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-end">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                Tambah Buku
+                                Edit Buku
                             </li>
                         </ol>
                     </div>
@@ -159,13 +159,59 @@
 
                                 <div class="col-auto">
                                     <img id="imagePreview" style="height: 400px; width: 250px; object-fit: contain;"
-                                        src="{{ env('COVER_PATH') . $book->cover }}" alt="cover preview">
+                                        src="{{ asset('storage/covers/' . $book->cover) }}"alt="cover preview">
                                     <div class="input-group mt-3">
                                         <input type="file" accept="image/*" class="form-control" name="cover"
                                             id="cover" value="{{ $book->cover }}">
                                         <label class="input-group-text" for="cover">Upload</label>
                                     </div>
                                 </div>
+
+                                 <hr class="my-4">
+
+                            <h4>File Ebook (Opsional)</h4>
+                            <p class="text-muted small">Upload file PDF ebook jika tersedia. File akan disimpan secara aman dan dapat diakses oleh member.</p>
+
+                            @if ($book->ebook_pdf_path)
+                                <div class="alert alert-info alert-dismissible mb-3" role="alert">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>📄 File Ebook Tersedia</strong><br>
+                                            <small>File saat ini: <code>{{ $book->ebook_pdf_path }}</code></small><br>
+                                            <a href="{{ asset('storage/ebooks/' . $book->ebook_pdf_path) }}" target="_blank" class="btn btn-sm btn-info mt-2">
+                                                👁️ Lihat File PDF
+                                            </a>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="alert alert-warning mb-3" role="alert">
+                                    <small>⚠️ Buku ini belum memiliki file ebook PDF</small>
+                                </div>
+                            @endif
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="ebook_pdf" class="form-label">
+                                            @if ($book->ebook_pdf_path)
+                                                Ganti PDF Ebook
+                                            @else
+                                                Upload PDF Ebook
+                                            @endif
+                                        </label>
+                                        <input type="file" accept=".pdf" class="form-control" name="ebook_pdf"
+                                            id="ebook_pdf">
+                                        <small class="text-muted">Format: PDF | Maksimal ukuran: 100MB
+                                            @if ($book->ebook_pdf_path)
+                                                | Biarkan kosong jika tidak ingin mengganti file
+                                            @endif
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             </div>
                             <button type="submit" class="mt-2 btn btn-primary">Ubah data Buku</button>
                         </form>

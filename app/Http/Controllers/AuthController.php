@@ -16,11 +16,11 @@ class AuthController extends Controller
     public function authenticate(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'nisn'      => ['required', 'string', 'max:10'],
+            'nim'      => ['required', 'string', 'max:10'],
             'password'  => ['required'],
         ], [
-            'nisn.required'             => 'NISN perlu diisi.',
-            'nisn.max'                  => 'Maksimal NISN adalah :max digit.',
+            'nim.required'             => 'NIM perlu diisi.',
+            'nim.max'                  => 'Maksimal NIM adalah :max digit.',
             'password.required'         => 'Password perlu diisi.',
         ]);
 
@@ -31,7 +31,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'errors'    => 'NISN atau Password salah.',
+            'errors'    => 'NIM atau Password salah.',
         ]);
     }
 
@@ -39,12 +39,12 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'nisn' => ['required', 'string', 'max:10', 'unique:'.User::class],
+            'nim' => ['required', 'string', 'max:10', 'unique:'.User::class],
             'password' => ['required', 'min:8', 'confirmed', Rules\Password::defaults()],
         ], [
-            'nisn.required'             => 'NISN perlu diisi.',
+            'nim.required'             => 'NIM perlu diisi.',
             // 'nisn.min:10'               => 'NISN harus 10 digit.',
-            'nisn.unique'               => 'NISN telah terpakai.',
+            'nim.unique'               => 'NIM telah terpakai.',
             'name.required'             => 'Nama perlu diisi.',
             'password.required'         => 'Password perlu diisi.',
             'password.min'              => 'Minimal password adalah :min.',
@@ -53,7 +53,7 @@ class AuthController extends Controller
 
         $user = User::create([
             'name' => $request->name,
-            'nisn' => $request->nisn,
+            'nim' => $request->nim,
             'password' => Hash::make($request->password),
         ]);
 

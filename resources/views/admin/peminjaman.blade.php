@@ -48,7 +48,7 @@
                                         <tr>
                                             <th>No. Peminjaman</th>
                                             <th>Info Buku</th>
-                                            <th>Nama Siswa</th>
+                                            <th>Nama Mahasiswa</th>
                                             <th>Tanggal Peminjaman</th>
                                             <th>Tanggal Pengembalian</th>
                                             <th>Status</th>
@@ -65,7 +65,7 @@
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-4">
-                                                            <img src="{{ env('COVER_PATH') . $data->cover }}"
+                                                            <img src="{{ asset('storage/covers/' . $data->cover) }}"
                                                                 width="100%" alt="cover">
                                                         </div>
                                                         <div class="col-auto col-8" style="overflow: hidden">

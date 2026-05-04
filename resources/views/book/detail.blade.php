@@ -30,7 +30,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-3">
-                            <img src="{{ $book->cover }}" class="img-fluid" style="object-fit: cover;">
+                            <img src="{{ asset('storage/covers/' . $book->cover) }}" class="img-fluid" style="object-fit: cover;">
                         </div>
                         <div class="col-auto col-lg-9">
                             <h5>Informasi Buku</h5>
@@ -100,18 +100,17 @@
         <div class="row justify-content-start" style="margin-top: 28px;">
             <div class="col-auto me-3">
                 <div class="d-flex flex-column mb-3">
-                    <img src="{{ $book->cover }}" style="object-fit: cover; width: 18rem;">
+                    <img src="{{ asset('storage/covers/' . $book->cover) }}" style="object-fit: cover; width: 18rem;">
                     <button
                         style="width: 100%; background-color: #6499E9; border-radius: 8px; margin-top: 24px; font-size: 16px;"
                         class="btn btn-primary" style="urbanist-semibold" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">Pinjam Buku</button>
 
-                    {{-- <form action="{{ route('book.borrow', base64_encode($book->id)) }}" method="POST">
-                        @csrf
-                        <button 
-                            style="width: 100%; background-color: white; border: 1px solid #6499E9; border-radius: 8px; color: #6499E9; margin-top: 16px; font-size: 16px;"
-                            class="btn btn-primary" type="button" style="urbanist-semibold">Tambah ke Daftar Baca</button>
-                    </form> --}}
+                    @if ($book->ebook_pdf_path)
+                        <a href="{{ asset('storage/ebooks/' . $book->ebook_pdf_path) }}" target="_blank"
+                            style="width: 100%; background-color: #28a745; border-radius: 8px; margin-top: 12px; font-size: 16px;"
+                            class="btn btn-success">📖 Baca Ebook</a>
+                    @endif
                 </div>
             </div>
             <div class="col ms-5">

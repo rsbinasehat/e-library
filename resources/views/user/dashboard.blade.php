@@ -62,7 +62,7 @@
                 @foreach ($paginator->items() as $book)
                     <div class="col-sm-3 mx-3 mt-5 card"
                         style="width: 18rem; padding: 0px; border-radius: 16px; overflow: hidden; box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15); border: none;">
-                        <img src="{{ $book->cover }}" height="440px" width="100%" style="object-fit: cover;"
+                        <img src="{{ asset('storage/covers/' . $book->cover) }}" height="440px" width="100%" style="object-fit: cover;"
                             class="card-img-top" alt="...">
                         <div class="card-body position-absolute"
                             style="bottom: 0; width: 100%; background-color: white !important; border-radius: 16px;">

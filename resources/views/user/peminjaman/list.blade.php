@@ -62,7 +62,7 @@
                             <td>
                                 <div class="row row-cols-auto">
                                     <div class="col">
-                                        <img src="{{ env('COVER_PATH') . $book->cover }}"
+                                        <img src="{{ asset('storage/covers/' . $book->cover) }}"
                                             width="80px" alt="cover">
                                     </div>
                                     <div class="col-auto col-8">

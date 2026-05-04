@@ -39,36 +39,41 @@ class DashboardController extends BaseController
             $lastMonth = Carbon::now()->subMonth(1);
 
         $topBookBorrowed = DB::table('peminjaman')
-            ->select('book.title', DB::raw('count(*) as borrowed'))
-            ->leftJoin('book', 'book.id', '=', 'peminjaman.book_id')
-            ->where('peminjaman.status', '!=', config('constants.peminjaman.status.0'))
-            ->where('peminjaman.status', '!=', config('constants.peminjaman.status.3'))
-            ->whereBetween('peminjaman.created_at', [$lastMonth, $today])
-            ->groupBy('book.title')
-            ->get();
+    ->select('book.title', DB::raw('count(*) as borrowed'))
+    ->leftJoin('book', 'book.id', '=', 'peminjaman.book_id')
+    ->whereNotIn('peminjaman.status', [
+        config('constants.peminjaman.status.0'),
+        config('constants.peminjaman.status.3'),
+    ])
+    ->whereBetween('peminjaman.created_at', [$lastMonth, $today])
+    ->groupBy('book.title')
+    ->get();
 
 
 
-        $topUser = DB::table('peminjaman')
-            ->select('user.name', 'user.id', DB::raw('count(*) as borrowed'))
-            ->leftJoin('user', 'user.id', '=', 'peminjaman.user_id')
-            ->where('peminjaman.status', '!=', config('constants.peminjaman.status.0'))
-            ->where('peminjaman.status', '!=', config('constants.peminjaman.status.3'))
-            ->whereBetween('peminjaman.created_at', [$lastMonth, $today])
-            ->groupBy('user.id')
-            ->get();
-
+     $topUser = DB::table('peminjaman')
+    ->select('user.id', 'user.name', DB::raw('count(*) as borrowed'))
+    ->leftJoin('user', 'user.id', '=', 'peminjaman.user_id')
+    ->whereNotIn('peminjaman.status', [
+        config('constants.peminjaman.status.0'),
+        config('constants.peminjaman.status.3'),
+    ])
+    ->whereBetween('peminjaman.created_at', [$lastMonth, $today])
+    ->groupBy('user.id', 'user.name') // <- wajib
+    ->get();
             // select peminjaman
             // join book to get book
-        $popularCategories = DB::table('peminjaman')
-            ->select('category.category', DB::raw('count(*) as borrowed'))
-            ->leftJoin('book_category', 'book_category.book_id', '=', 'peminjaman.book_id')
-            ->leftJoin('category', 'category.id', '=', 'book_category.category_id')
-            ->where('peminjaman.status', '!=', config('constants.peminjaman.status.0'))
-            ->where('peminjaman.status', '!=', config('constants.peminjaman.status.3'))
-            ->whereBetween('peminjaman.created_at', [$lastMonth, $today])
-            ->groupBy('category.id')
-            ->get();
+       $popularCategories = DB::table('peminjaman')
+    ->select('category.id', 'category.category', DB::raw('count(*) as borrowed'))
+    ->leftJoin('book_category', 'book_category.book_id', '=', 'peminjaman.book_id')
+    ->leftJoin('category', 'category.id', '=', 'book_category.category_id')
+    ->whereNotIn('peminjaman.status', [
+        config('constants.peminjaman.status.0'),
+        config('constants.peminjaman.status.3'),
+    ])
+    ->whereBetween('peminjaman.created_at', [$lastMonth, $today])
+    ->groupBy('category.id', 'category.category') // <- wajib
+    ->get();
 
         // dd($topUser);
 

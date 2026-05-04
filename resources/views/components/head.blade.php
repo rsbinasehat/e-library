@@ -14,6 +14,7 @@
     </script>
 
     <!-- Fonts -->
+     <link rel="stylesheet" href="{{ asset('css/login-responsive.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
