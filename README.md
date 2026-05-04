@@ -1,39 +1,20 @@
 <h1 align="center">Perpus Digital</h1>
 
 <p align="center">
-    E-Library built with Laravel 11 and bootstrap 5.
+    E-Library dengan Laravel 11 dan bootstrap 5.
 </p>
 
-<h3>Users</h3>
-<p align="center">
-    <img src="https://raw.githubusercontent.com/ai-null/perpus_digital/master/public/img/demo/index.png" width="30%" />
-    <img src="https://raw.githubusercontent.com/ai-null/perpus_digital/master/public/img/demo/contacts.png" width="30%" />
-    <img src="https://raw.githubusercontent.com/ai-null/perpus_digital/master/public/img/demo/login.png" width="30%" />
-    <img src="https://raw.githubusercontent.com/ai-null/perpus_digital/master/public/img/demo/register.png" width="30%" />
-    <img src="https://raw.githubusercontent.com/ai-null/perpus_digital/master/public/img/demo/dashboard.png" width="30%" />
-    <img src="https://raw.githubusercontent.com/ai-null/perpus_digital/master/public/img/demo/book_detail.png" width="30%" />
-</p>
-
-<h3>Admins</h3>
-<p align="center">
-    <img width="30%" alt="image" src="https://github.com/user-attachments/assets/0278e453-9b93-4d38-b850-fe2659fc4647" />
-    <img width="30%" alt="image" src="https://github.com/user-attachments/assets/f70ff3c0-5543-4793-8ba4-241c9142623d" />
-    <img width="30%" alt="image" src="https://github.com/user-attachments/assets/ab3eb78c-b844-4c51-833b-f8b2e846b499" />
-    <img width="30%" alt="image" src="https://github.com/user-attachments/assets/fced4827-0afc-435c-8b16-7373f61bf7b7" />
-</p>
-
-<br />
-
-## Features
-- Users :
-    - book catalog dashboard
-    - book borrowing transaction
-    - search & filter book by its categories
+## Fitur
+- User :
+    - Dasbor katalog buku
+    - Transaksi peminjaman buku
+    - Cari & saring buku berdasarkan kategorinya
+  
 - Admins :
-    - analytics for book transaction
-    - book reservation transaction management
-    - categories management
-    - books management
+    - Analisis transaksi buku
+    - Manajemen transaksi reservasi buku
+    - Manajemen kategori
+    - Manajemen buku
 
 <br/>
 
@@ -45,7 +26,7 @@
 
 <br/>
 
-## How to Install
+## Cara Menginstal
 1. Jalankan composer install to install dependencies
    
    ```$ composer install```
@@ -53,9 +34,9 @@
    
    ```import database yang bernama dbperpus.sql ```
    
-3. Run the program
+3. Jalankan program webnya
 
-   ```$ php artisan serve```
+   ketik perintah ```$ php artisan serve```
 
 
 <br/>
