@@ -40,10 +40,13 @@
 
 
 ```NOTE:```
+<br/>
 Untuk merubah admin role database kriterianya:
+<br/>
 m: member atau user
 a: itu untuk admin
-
+<br/>
+Merubahnya di table user 
 <br/>
 
 
